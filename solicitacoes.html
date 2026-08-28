@@ -9,204 +9,65 @@
 <body>
 <div class="app">
 <aside class="sidebar">
-  <div class="brand"><div class="brand-logo">◢ <span>security</span></div><div class="brand-sub">CENTRAL EXECUTIVA DE CLIENTES</div></div>
-  <nav class="nav">
-    <a href="dashboard.html" data-page="dashboard"><span class="icon">▦</span><span>Dashboard</span></a>
-    <a href="solicitacoes.html" data-page="solicitacoes"><span class="icon">▤</span><span>Solicitações</span></a>
-    <a href="clientes.html" data-page="clientes"><span class="icon">●</span><span>Clientes</span></a>
-    <a href="relatorios.html" data-page="relatorios"><span class="icon">▥</span><span>Relatórios</span></a>
-  </nav>
-  <div class="sidebar-footer">Gestão executiva<br><strong>Segurança & Serviços</strong></div>
+<div class="brand"><div class="brand-logo">◢ <span>security</span></div><div class="brand-sub">CENTRAL EXECUTIVA DE CLIENTES</div></div>
+<nav class="nav">
+<a href="dashboard.html" data-page="dashboard"><span class="icon">▦</span><span>Dashboard</span></a>
+<a href="solicitacoes.html" data-page="solicitacoes"><span class="icon">▤</span><span>Solicitações</span></a>
+<a href="clientes.html" data-page="clientes"><span class="icon">●</span><span>Clientes</span></a>
+<a href="relatorios.html" data-page="relatorios"><span class="icon">▥</span><span>Relatórios</span></a>
+</nav>
+<div class="sidebar-footer">Gestão executiva<br><strong>Segurança & Serviços</strong></div>
 </aside>
 <div class="main">
-<header class="top-header">
-  <div><div class="page-title">Solicitações & Tratativas</div><div class="page-subtitle">Centralize problemas, demandas, responsáveis, prazos e planos de ação.</div></div>
-  <div class="profile"><div class="profile-text"><strong>Gestão Security</strong><br><span id="userEmail">Carregando...</span></div><div class="avatar">GS</div></div>
-</header>
+<header class="top-header"><div><div class="page-title">Solicitações & Tratativas</div><div class="page-subtitle">Centralize problemas, demandas, responsáveis, prazos e planos de ação.</div></div><div class="profile"><div class="profile-text"><strong>Gestão Security</strong><br><span id="userEmail">Carregando...</span></div><div class="avatar">GS</div></div></header>
 <main class="content">
-  <div class="section-head">
-    <div><h1>Solicitações & Tratativas</h1><p>Registre e acompanhe as ações com os clientes.</p></div>
-    <button class="primary" id="newBtn">＋ Nova solicitação</button>
-  </div>
-  <section class="panel">
-    <div class="filters">
-      <input id="search" placeholder="Pesquisar cliente, assunto">
-      <select id="statusFilter"><option value="">Todos os status</option><option>Aberto</option><option>Em andamento</option><option>Concluído</option></select>
-      <select id="priorityFilter"><option value="">Todas as prioridades</option><option>Crítica</option><option>Alta</option><option>Média</option></select>
-      <select id="clientFilter"><option value="">Todos os clientes</option></select>
-      <button id="restore">Restaurar ações</button>
-      <button id="export">Exportar CSV</button>
-    </div>
-    <div class="table-wrap">
-      <table class="data-table">
-        <thead><tr><th>ID</th><th>DATA</th><th>CLIENTE</th><th>CATEGORIA</th><th>ASSUNTO</th><th>RESPONSÁVEL</th><th>PRAZO</th><th>PRIORIDADE</th><th>STATUS</th><th>AÇÃO</th></tr></thead>
-        <tbody id="rows"><tr><td colspan="10" class="empty">Carregando...</td></tr></tbody>
-      </table>
-    </div>
-  </section>
-  <p id="msg" class="panel-subtitle" style="margin-top:10px"></p>
-</main>
-</div></div>
+<div class="section-head"><div><h1>Solicitações & Tratativas</h1><p>Registre e acompanhe as ações com os clientes.</p></div><button class="primary" id="newBtn">＋ Nova solicitação</button></div>
+<section class="panel">
+<div class="filters"><input id="search" placeholder="Pesquisar cliente, assunto ou ação"><select id="statusFilter"><option value="">Todos os status</option><option>Aberto</option><option>Em andamento</option><option>Concluído</option></select><select id="priorityFilter"><option value="">Todas as prioridades</option><option>Crítica</option><option>Alta</option><option>Média</option></select><select id="clientFilter"><option value="">Todos os clientes</option></select><button id="restore">Restaurar ações</button><button id="export">Exportar CSV</button></div>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>ID</th><th>DATA</th><th>CLIENTE</th><th>CATEGORIA</th><th>ASSUNTO</th><th>RESPONSÁVEL</th><th>PRAZO</th><th>PRIORIDADE</th><th>STATUS</th><th>AÇÃO / PRÓXIMO PASSO</th><th>EDITAR</th></tr></thead><tbody id="rows"><tr><td colspan="11" class="empty">Carregando...</td></tr></tbody></table></div>
+</section><p id="msg" class="panel-subtitle" style="margin-top:10px"></p>
+</main></div></div>
 
-<!-- Modal nova solicitação -->
-<div class="modal-backdrop" id="modal">
-  <div class="modal">
-    <div class="modal-head"><h2>Nova solicitação</h2><button class="close" id="close">×</button></div>
-    <form id="form">
-      <div class="form-grid">
-        <div><label>Cliente</label><select id="cliente" required></select></div>
-        <div><label>Categoria</label><select id="categoria"><option>Operacional</option><option>Contratual</option><option>RH / Benefícios</option><option>Tecnologia</option><option>Comunicação</option><option>Administrativo</option></select></div>
-        <div class="field-full"><label>Assunto</label><input id="titulo" required placeholder="Ex.: Melhoria no sistema de rádio"></div>
-        <div class="field-full"><label>Descrição</label><textarea id="descricao" rows="3" placeholder="Descreva a demanda"></textarea></div>
-        <div class="field-full"><label>Ação / Próximo passo</label><textarea id="acao" rows="3" placeholder="Informe a ação que será realizada"></textarea></div>
-        <div><label>Responsável</label><input id="responsavel" placeholder="Nome / área"></div>
-        <div><label>Prazo</label><input id="prazo" type="date"></div>
-        <div><label>Prioridade</label><select id="prioridade"><option>Média</option><option>Alta</option><option>Crítica</option></select></div>
-        <div><label>Solicitante</label><input id="solicitante" placeholder="Nome"></div>
-      </div>
-      <div class="form-actions"><button type="button" class="secondary" id="cancel">Cancelar</button><button type="submit" class="primary" id="save">Salvar solicitação</button></div>
-      <p id="formMsg" class="message"></p>
-    </form>
-  </div>
-</div>
+<div class="modal-backdrop" id="modal"><div class="modal"><div class="modal-head"><h2>Nova solicitação</h2><button class="close" id="close">×</button></div><form id="form"><div class="form-grid">
+<div><label>Cliente</label><select id="cliente" required></select></div><div><label>Categoria</label><select id="categoria"><option>Operacional</option><option>Contratual</option><option>RH / Benefícios</option><option>Tecnologia</option><option>Comunicação</option><option>Administrativo</option></select></div>
+<div class="field-full"><label>Assunto</label><input id="titulo" required placeholder="Ex.: Melhoria no sistema de rádio"></div>
+<div class="field-full"><label>Descrição</label><textarea id="descricao" rows="3" placeholder="Descreva a demanda"></textarea></div>
+<div class="field-full"><label>Ação / Próximo passo</label><textarea id="acao" rows="3" placeholder="Informe a ação que será realizada"></textarea></div>
+<div><label>Responsável</label><input id="responsavel" placeholder="Nome / área"></div><div><label>Prazo</label><input id="prazo" type="date"></div><div><label>Prioridade</label><select id="prioridade"><option>Média</option><option>Alta</option><option>Crítica</option></select></div><div><label>Solicitante</label><input id="solicitante" placeholder="Nome"></div>
+</div><div class="form-actions"><button type="button" class="secondary" id="cancel">Cancelar</button><button type="submit" class="primary">Salvar solicitação</button></div><p id="formMsg" class="message"></p></form></div></div>
 
-<!-- Modal edição -->
-<div class="modal-backdrop" id="editModal">
-  <div class="modal">
-    <div class="modal-head"><h2>Editar solicitação</h2><button class="close" id="editClose">×</button></div>
-    <form id="editForm">
-      <input type="hidden" id="editId">
-      <div class="form-grid">
-        <div><label>Cliente</label><select id="editCliente" required></select></div>
-        <div><label>Categoria</label><select id="editCategoria"><option>Operacional</option><option>Contratual</option><option>RH / Benefícios</option><option>Tecnologia</option><option>Comunicação</option><option>Administrativo</option></select></div>
-        <div class="field-full"><label>Assunto</label><input id="editTitulo" required></div>
-        <div class="field-full"><label>Descrição</label><textarea id="editDescricao" rows="3"></textarea></div>
-        <div class="field-full"><label>Ação / Próximo passo</label><textarea id="editAcao" rows="4" placeholder="Descreva o que será feito, quem fará e qual o próximo passo"></textarea></div>
-        <div><label>Responsável</label><input id="editResponsavel"></div>
-        <div><label>Prazo</label><input id="editPrazo" type="date"></div>
-        <div><label>Prioridade</label><select id="editPrioridade"><option>Média</option><option>Alta</option><option>Crítica</option></select></div>
-        <div><label>Status</label><select id="editStatus"><option>Aberto</option><option>Em andamento</option><option>Concluído</option></select></div>
-        <div class="field-full"><label>Observações</label><textarea id="editObservacoes" rows="3" placeholder="Registre atualizações ou observações"></textarea></div>
-      </div>
-      <div class="form-actions"><button type="button" class="secondary" id="editCancel">Cancelar</button><button type="submit" class="primary" id="editSave">Salvar alterações</button></div>
-      <p id="editMsg" class="message"></p>
-    </form>
-  </div>
-</div>
+<div class="modal-backdrop" id="editModal"><div class="modal"><div class="modal-head"><h2>Editar solicitação</h2><button class="close" id="editClose">×</button></div><form id="editForm"><input type="hidden" id="editId"><div class="form-grid">
+<div><label>Cliente</label><select id="editCliente" required></select></div><div><label>Categoria</label><select id="editCategoria"><option>Operacional</option><option>Contratual</option><option>RH / Benefícios</option><option>Tecnologia</option><option>Comunicação</option><option>Administrativo</option></select></div>
+<div class="field-full"><label>Assunto</label><input id="editTitulo" required></div><div class="field-full"><label>Descrição</label><textarea id="editDescricao" rows="3"></textarea></div><div class="field-full"><label>Ação / Próximo passo</label><textarea id="editAcao" rows="4" placeholder="Descreva o que será feito e o próximo passo"></textarea></div>
+<div><label>Responsável</label><input id="editResponsavel"></div><div><label>Prazo</label><input id="editPrazo" type="date"></div><div><label>Prioridade</label><select id="editPrioridade"><option>Média</option><option>Alta</option><option>Crítica</option></select></div><div><label>Status</label><select id="editStatus"><option>Aberto</option><option>Em andamento</option><option>Concluído</option></select></div>
+</div><div class="form-actions"><button type="button" class="secondary" id="editCancel">Cancelar</button><button type="submit" class="primary">Salvar alterações</button></div><p id="editMsg" class="message"></p></form></div></div>
 
 <script type="module">
 import { supabase } from './js/supabase.js';
 import { requireAuth, setupShell, escapeHtml, formatDate, badgePriority } from './js/app.js';
-
 setupShell('solicitacoes');
-const user = await requireAuth();
-let rows = [], clients = [];
-const q = id => document.getElementById(id);
-
+const user=await requireAuth();
+let rows=[],clients=[]; const q=id=>document.getElementById(id);
 function render(){
-  const s=q('search').value.toLowerCase(), sf=q('statusFilter').value, pf=q('priorityFilter').value, cf=q('clientFilter').value;
-  const filtered=rows.filter(r =>
-    (!s || `${r.titulo||''} ${r.clientes?.nome||''} ${r.acao||''}`.toLowerCase().includes(s)) &&
-    (!sf || r.status===sf) && (!pf || r.prioridade===pf) && (!cf || r.cliente_id===cf)
-  );
-  q('rows').innerHTML=filtered.map(r=>{
-    const action=(r.acao||'').trim();
-    const actionText=action ? escapeHtml(action.length>65 ? action.slice(0,65)+'…' : action) : '<span style="opacity:.55">Sem ação</span>';
-    return `<tr>
-      <td><strong>${escapeHtml(r.codigo||r.id?.slice(0,8)||'SOL')}</strong></td>
-      <td>${formatDate(r.criado_em||r.data)}</td>
-      <td>${escapeHtml(r.clientes?.nome||'—')}</td>
-      <td>${escapeHtml(r.categoria||r.tipo||'—')}</td>
-      <td title="${escapeHtml(r.descricao||'')}">${escapeHtml(r.titulo||'—')}</td>
-      <td>${escapeHtml(r.responsavel||'—')}</td>
-      <td>${formatDate(r.prazo)}</td>
-      <td>${badgePriority(r.prioridade)}</td>
-      <td><select class="status-edit" data-id="${r.id}"><option ${r.status==='Aberto'?'selected':''}>Aberto</option><option ${r.status==='Em andamento'?'selected':''}>Em andamento</option><option ${r.status==='Concluído'?'selected':''}>Concluído</option></select></td>
-      <td><div style="display:flex;gap:6px;align-items:center;min-width:190px"><span title="${escapeHtml(action)}" style="max-width:105px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${actionText}</span><button class="small-btn edit" data-id="${r.id}">Editar</button><button class="small-btn delete" data-id="${r.id}">Excluir</button></div></td>
-    </tr>`;
-  }).join('') || '<tr><td colspan="10" class="empty">Nenhuma solicitação encontrada.</td></tr>';
-
-  document.querySelectorAll('.status-edit').forEach(el=>el.onchange=async()=>{
-    const {error}=await supabase.from('solicitacoes').update({status:el.value}).eq('id',el.dataset.id);
-    if(error) alert(error.message); else await load();
-  });
-  document.querySelectorAll('.edit').forEach(el=>el.onclick=()=>openEdit(el.dataset.id));
-  document.querySelectorAll('.delete').forEach(el=>el.onclick=async()=>{
-    if(confirm('Excluir esta solicitação?')){
-      const {error}=await supabase.from('solicitacoes').delete().eq('id',el.dataset.id);
-      if(error) alert(error.message); else await load();
-    }
-  });
+const s=q('search').value.toLowerCase().trim(),sf=q('statusFilter').value,pf=q('priorityFilter').value,cf=q('clientFilter').value;
+const filtered=rows.filter(r=>(!s||`${r.titulo||''} ${r.clientes?.nome||''} ${r.acao||''}`.toLowerCase().includes(s))&&(!sf||r.status===sf)&&(!pf||r.prioridade===pf)&&(!cf||r.cliente_id===cf));
+q('rows').innerHTML=filtered.map(r=>{const action=(r.acao||'').trim();const txt=action?(action.length>80?action.slice(0,80)+'…':action):'Sem ação cadastrada';return `<tr><td><strong>${escapeHtml(r.codigo||r.id?.slice(0,8)||'SOL')}</strong></td><td>${formatDate(r.criado_em||r.data)}</td><td>${escapeHtml(r.clientes?.nome||r.cliente||'—')}</td><td>${escapeHtml(r.categoria||r.tipo||'—')}</td><td title="${escapeHtml(r.descricao||'')}">${escapeHtml(r.titulo||'—')}</td><td>${escapeHtml(r.responsavel||'—')}</td><td>${formatDate(r.prazo)}</td><td>${badgePriority(r.prioridade)}</td><td><select class="status-edit" data-id="${r.id}"><option ${r.status==='Aberto'?'selected':''}>Aberto</option><option ${r.status==='Em andamento'?'selected':''}>Em andamento</option><option ${r.status==='Concluído'?'selected':''}>Concluído</option></select></td><td title="${escapeHtml(action)}" style="max-width:260px;white-space:normal">${escapeHtml(txt)}</td><td><div style="display:flex;gap:5px"><button class="small-btn edit" data-id="${r.id}">Editar</button><button class="small-btn delete" data-id="${r.id}">Excluir</button></div></td></tr>`}).join('')||'<tr><td colspan="11" class="empty">Nenhuma solicitação encontrada.</td></tr>';
+document.querySelectorAll('.status-edit').forEach(el=>el.onchange=async()=>{const{error}=await supabase.from('solicitacoes').update({status:el.value}).eq('id',el.dataset.id);if(error)alert(error.message);else load()});
+document.querySelectorAll('.edit').forEach(el=>el.onclick=()=>openEdit(el.dataset.id));
+document.querySelectorAll('.delete').forEach(el=>el.onclick=async()=>{if(confirm('Excluir esta solicitação?')){const{error}=await supabase.from('solicitacoes').delete().eq('id',el.dataset.id);if(error)alert(error.message);else load()}});
 }
-
 async function load(){
-  const r=await supabase.from('solicitacoes').select('*, clientes(nome)').order('criado_em',{ascending:false});
-  if(r.error){q('rows').innerHTML=`<tr><td colspan="10" class="empty">Não foi possível carregar as solicitações: ${escapeHtml(r.error.message)}</td></tr>`;return;}
-  rows=r.data||[]; render(); q('msg').textContent=`${rows.length} solicitação(ões) registrada(s).`;
+const r=await supabase.from('solicitacoes').select('*, clientes(nome)');
+if(r.error){q('rows').innerHTML=`<tr><td colspan="11" class="empty">Não foi possível carregar as solicitações: ${escapeHtml(r.error.message)}</td></tr>`;return;} rows=r.data||[];render();q('msg').textContent=`${rows.length} solicitação(ões) registrada(s).`;
 }
-
-async function loadClients(){
-  const r=await supabase.from('clientes').select('id,nome').eq('ativo',true).order('nome');
-  if(r.error){console.error(r.error);return;}
-  clients=r.data||[];
-  const options=clients.map(c=>`<option value="${c.id}">${escapeHtml(c.nome)}</option>`).join('');
-  q('clientFilter').innerHTML='<option value="">Todos os clientes</option>'+options;
-  q('cliente').innerHTML=options||'<option value="">Cadastre um cliente primeiro</option>';
-  q('editCliente').innerHTML=options||'<option value="">Cadastre um cliente primeiro</option>';
-}
-
-function openEdit(id){
-  const r=rows.find(x=>x.id===id); if(!r) return;
-  q('editId').value=r.id;
-  q('editCliente').value=r.cliente_id||'';
-  q('editCategoria').value=r.categoria||r.tipo||'Operacional';
-  q('editTitulo').value=r.titulo||'';
-  q('editDescricao').value=r.descricao||'';
-  q('editAcao').value=r.acao||'';
-  q('editResponsavel').value=r.responsavel||'';
-  q('editPrazo').value=r.prazo ? String(r.prazo).slice(0,10) : '';
-  q('editPrioridade').value=r.prioridade||'Média';
-  q('editStatus').value=r.status||'Aberto';
-  q('editObservacoes').value=r.observatorios||r.observacoes||'';
-  q('editMsg').textContent='';
-  q('editModal').classList.add('open');
-}
-
+async function loadClients(){const r=await supabase.from('clientes').select('id,nome').eq('ativo',true).order('nome');if(r.error){console.error(r.error);return;}clients=r.data||[];const o=clients.map(c=>`<option value="${c.id}">${escapeHtml(c.nome)}</option>`).join('');q('clientFilter').innerHTML='<option value="">Todos os clientes</option>'+o;q('cliente').innerHTML=o||'<option value="">Cadastre um cliente primeiro</option>';q('editCliente').innerHTML=o||'<option value="">Cadastre um cliente primeiro</option>';}
+function openEdit(id){const r=rows.find(x=>x.id===id);if(!r)return;q('editId').value=r.id;q('editCliente').value=r.cliente_id||'';q('editCategoria').value=r.categoria||r.tipo||'Operacional';q('editTitulo').value=r.titulo||'';q('editDescricao').value=r.descricao||'';q('editAcao').value=r.acao||'';q('editResponsavel').value=r.responsavel||'';q('editPrazo').value=r.prazo?String(r.prazo).slice(0,10):'';q('editPrioridade').value=r.prioridade||'Média';q('editStatus').value=r.status||'Aberto';q('editMsg').textContent='';q('editModal').classList.add('open');}
 ['search','statusFilter','priorityFilter','clientFilter'].forEach(id=>q(id).addEventListener('input',render));
-q('newBtn').onclick=()=>q('modal').classList.add('open');
-q('close').onclick=q('cancel').onclick=()=>q('modal').classList.remove('open');
-q('editClose').onclick=q('editCancel').onclick=()=>q('editModal').classList.remove('open');
-
-q('form').onsubmit=async e=>{
-  e.preventDefault(); q('formMsg').textContent='Salvando...';
-  const payload={cliente_id:q('cliente').value,titulo:q('titulo').value.trim(),descricao:q('descricao').value.trim(),categoria:q('categoria').value,prioridade:q('prioridade').value,status:'Aberto',solicitante:q('solicitante').value.trim(),responsavel:q('responsavel').value.trim(),prazo:q('prazo').value||null,acao:q('acao').value.trim()};
-  const {error}=await supabase.from('solicitacoes').insert(payload);
-  if(error){q('formMsg').textContent=error.message;return;}
-  q('form').reset(); q('modal').classList.remove('open'); q('formMsg').textContent=''; await load();
-};
-
-q('editForm').onsubmit=async e=>{
-  e.preventDefault(); q('editMsg').textContent='Salvando alterações...';
-  const id=q('editId').value;
-  const payload={cliente_id:q('editCliente').value,titulo:q('editTitulo').value.trim(),descricao:q('editDescricao').value.trim(),categoria:q('editCategoria').value,acao:q('editAcao').value.trim(),responsavel:q('editResponsavel').value.trim(),prazo:q('editPrazo').value||null,prioridade:q('editPrioridade').value,status:q('editStatus').value,observatorios:q('editObservacoes').value.trim()};
-  const {error}=await supabase.from('solicitacoes').update(payload).eq('id',id);
-  if(error){q('editMsg').textContent=error.message;return;}
-  q('editModal').classList.remove('open'); q('editMsg').textContent=''; await load();
-};
-
-q('restore').onclick=()=>{q('search').value='';q('statusFilter').value='';q('priorityFilter').value='';q('clientFilter').value='';render();};
-
-q('export').onclick=()=>{
-  const headers=['ID','Data','Cliente','Categoria','Assunto','Responsável','Prazo','Prioridade','Status','Ação'];
-  const csv=[headers,...rows.map(r=>[r.codigo||r.id,formatDate(r.criado_em),r.clientes?.nome||'',r.categoria||r.tipo||'',r.titulo||'',r.responsavel||'',formatDate(r.prazo),r.prioridade||'',r.status||'',r.acao||''])]
-    .map(a=>a.map(v=>`"${String(v).replaceAll('"','""')}"`).join(';')).join('\n');
-  const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');
-  a.href=url;a.download='solicitacoes.csv';a.click();URL.revokeObjectURL(url);
-};
-
-await loadClients();
-await load();
-if(location.hash==='#nova') q('modal').classList.add('open');
+q('newBtn').onclick=()=>q('modal').classList.add('open');q('close').onclick=q('cancel').onclick=()=>q('modal').classList.remove('open');q('editClose').onclick=q('editCancel').onclick=()=>q('editModal').classList.remove('open');
+q('form').onsubmit=async e=>{e.preventDefault();q('formMsg').textContent='Salvando...';const payload={cliente_id:q('cliente').value,titulo:q('titulo').value.trim(),descricao:q('descricao').value.trim(),categoria:q('categoria').value,prioridade:q('prioridade').value,status:'Aberto',solicitante:q('solicitante').value.trim(),responsavel:q('responsavel').value.trim(),prazo:q('prazo').value||null,acao:q('acao').value.trim()};const{error}=await supabase.from('solicitacoes').insert(payload);if(error){q('formMsg').textContent='Erro ao salvar: '+error.message;return;}q('form').reset();q('modal').classList.remove('open');q('formMsg').textContent='';await load();};
+q('editForm').onsubmit=async e=>{e.preventDefault();q('editMsg').textContent='Salvando alterações...';const id=q('editId').value;const payload={cliente_id:q('editCliente').value,titulo:q('editTitulo').value.trim(),descricao:q('editDescricao').value.trim(),categoria:q('editCategoria').value,acao:q('editAcao').value.trim(),responsavel:q('editResponsavel').value.trim(),prazo:q('editPrazo').value||null,prioridade:q('editPrioridade').value,status:q('editStatus').value};const{error}=await supabase.from('solicitacoes').update(payload).eq('id',id);if(error){q('editMsg').textContent='Erro ao salvar: '+error.message;return;}q('editModal').classList.remove('open');await load();};
+q('restore').onclick=()=>{q('search').value='';q('statusFilter').value='';q('priorityFilter').value='';q('clientFilter').value='';render()};
+q('export').onclick=()=>{const headers=['ID','Data','Cliente','Categoria','Assunto','Responsável','Prazo','Prioridade','Status','Ação'];const csv=[headers,...rows.map(r=>[r.codigo||r.id,formatDate(r.criado_em||r.data),r.clientes?.nome||r.cliente||'',r.categoria||r.tipo||'',r.titulo||'',r.responsavel||'',formatDate(r.prazo),r.prioridade||'',r.status||'',r.acao||''])].map(a=>a.map(v=>`"${String(v??'').replaceAll('"','""')}"`).join(';')).join('\n');const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='solicitacoes.csv';a.click();URL.revokeObjectURL(url)};
+await loadClients();await load();if(location.hash==='#nova')q('modal').classList.add('open');
 </script>
-</body>
-</html>
+</body></html>
