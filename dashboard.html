@@ -16,6 +16,8 @@
     .card span { color:#69757a; font-size:13px; }
     .card strong { display:block; font-size:30px; margin-top:8px; }
     .welcome { margin-top:24px; padding:28px; border-radius:18px; background:#fff; border:1px solid #e1e8e5; }
+    .status { margin-top:10px; color:#69757a; font-size:12px; }
+    .error { color:#b42318; }
     @media(max-width:800px){.cards{grid-template-columns:repeat(2,1fr)}.dashboard{padding:20px}}
     @media(max-width:500px){.cards{grid-template-columns:1fr}.topbar{align-items:flex-start;flex-direction:column}}
   </style>
@@ -26,23 +28,70 @@
       <div><p class="eyebrow">D'MILA • SECURITY</p><h1>Central Executiva</h1><p class="user" id="userEmail">Carregando usuário...</p></div>
       <button class="logout" id="logoutButton">Sair</button>
     </header>
-    <section class="cards">
-      <article class="card"><span>Clientes ativos</span><strong>0</strong></article>
-      <article class="card"><span>Postos operacionais</span><strong>0</strong></article>
-      <article class="card"><span>Ocorrências</span><strong>0</strong></article>
-      <article class="card"><span>Alertas</span><strong>0</strong></article>
+
+    <section class="cards" aria-label="Indicadores">
+      <article class="card"><span>Clientes ativos</span><strong id="clientesCount">—</strong></article>
+      <article class="card"><span>Postos operacionais</span><strong id="postosCount">—</strong></article>
+      <article class="card"><span>Ocorrências</span><strong id="ocorrenciasCount">—</strong></article>
+      <article class="card"><span>Alertas</span><strong id="alertasCount">—</strong></article>
     </section>
-    <section class="welcome"><h2>Bem-vindo à Central Executiva</h2><p>A estrutura inicial do sistema está pronta. O próximo passo é conectar os módulos de clientes, usuários, ocorrências e indicadores ao banco de dados.</p></section>
+
+    <section class="welcome">
+      <h2>Bem-vindo à Central Executiva</h2>
+      <p>Os indicadores abaixo são carregados diretamente do banco de dados. Use esta tela como visão geral da operação.</p>
+      <p class="status" id="status">Atualizando indicadores...</p>
+    </section>
   </main>
+
   <script type="module">
     import { supabase } from './js/supabase.js';
-    const { data } = await supabase.auth.getUser();
-    if (!data.user) window.location.href = './index.html';
-    else document.querySelector('#userEmail').textContent = data.user.email;
-    document.querySelector('#logoutButton').addEventListener('click', async () => {
+
+    const $ = (id) => document.getElementById(id);
+
+    async function carregarDashboard() {
+      const { data, error: userError } = await supabase.auth.getUser();
+
+      if (userError || !data.user) {
+        window.location.href = './index.html';
+        return;
+      }
+
+      $('userEmail').textContent = data.user.email;
+
+      const consultas = await Promise.all([
+        supabase.from('clientes').select('id', { count: 'exact', head: true }).eq('ativo', true),
+        supabase.from('postos').select('id', { count: 'exact', head: true }).eq('status', 'ativo'),
+        supabase.from('ocorrencias').select('id', { count: 'exact', head: true }),
+        supabase.from('alertas').select('id', { count: 'exact', head: true })
+      ]);
+
+      const nomes = ['clientesCount', 'postosCount', 'ocorrenciasCount', 'alertasCount'];
+      const erros = [];
+
+      consultas.forEach((resultado, index) => {
+        if (resultado.error) {
+          $(nomes[index]).textContent = '0';
+          erros.push(resultado.error.message);
+        } else {
+          $(nomes[index]).textContent = resultado.count ?? 0;
+        }
+      });
+
+      if (erros.length) {
+        $('status').textContent = 'Alguns indicadores não puderam ser carregados. Verifique as tabelas e as políticas do Supabase.';
+        $('status').classList.add('error');
+        console.error('Erros ao carregar indicadores:', erros);
+      } else {
+        $('status').textContent = `Atualizado em ${new Date().toLocaleString('pt-BR')}`;
+      }
+    }
+
+    $('logoutButton').addEventListener('click', async () => {
       await supabase.auth.signOut();
       window.location.href = './index.html';
     });
+
+    carregarDashboard();
   </script>
 </body>
 </html>
