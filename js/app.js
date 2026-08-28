@@ -5,9 +5,36 @@ export const escapeHtml = (value='') => String(value).replace(/[&<>'"]/g, c => (
 export const formatDate = (value) => value ? new Date(value).toLocaleDateString('pt-BR') : '—';
 export const formatDateTime = (value) => value ? new Date(value).toLocaleString('pt-BR') : '—';
 
+function enablePublicView() {
+  document.documentElement.dataset.guest = 'true';
+  if (!document.getElementById('publicViewStyle')) {
+    const style = document.createElement('style');
+    style.id = 'publicViewStyle';
+    style.textContent = `#newBtn,#editModal,#modal .form-actions,.status-edit,.edit,.delete{display:none!important}`;
+    document.head.appendChild(style);
+  }
+  const userEmail = $('userEmail');
+  if (userEmail) userEmail.textContent = 'Visualização pública';
+  const profileEmail = $('profileEmail');
+  if (profileEmail) profileEmail.textContent = 'Visualização pública';
+  const profile = document.querySelector('.profile-text');
+  if (profile && !profile.querySelector('.public-login-link')) {
+    const link = document.createElement('a');
+    link.className = 'public-login-link';
+    link.href = './index.html';
+    link.textContent = 'Entrar para editar';
+    link.style.cssText = 'font-size:11px;text-decoration:underline;display:inline-block;margin-top:3px;';
+    profile.appendChild(link);
+  }
+}
+
 export async function requireAuth() {
   const { data } = await supabase.auth.getUser();
-  if (!data.user) { window.location.href = './index.html'; return null; }
+  if (!data.user) {
+    enablePublicView();
+    return null;
+  }
+  document.documentElement.dataset.guest = 'false';
   const email = data.user.email || '';
   const userEmail = $('userEmail');
   if (userEmail) userEmail.textContent = email;
