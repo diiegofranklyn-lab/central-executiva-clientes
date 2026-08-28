@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard • Central Executiva</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .dashboard { min-height: 100vh; padding: 32px; max-width: 1180px; margin: auto; }
+    .topbar { display:flex; justify-content:space-between; align-items:center; gap:20px; margin-bottom:30px; }
+    .topbar h1 { font-size:28px; }
+    .user { color:#69757a; font-size:14px; }
+    .logout { width:auto; margin:0; padding:10px 16px; background:#17202a; }
+    .cards { display:grid; grid-template-columns:repeat(4,1fr); gap:18px; }
+    .card { background:#fff; border:1px solid #e1e8e5; border-radius:18px; padding:22px; }
+    .card span { color:#69757a; font-size:13px; }
+    .card strong { display:block; font-size:30px; margin-top:8px; }
+    .welcome { margin-top:24px; padding:28px; border-radius:18px; background:#fff; border:1px solid #e1e8e5; }
+    @media(max-width:800px){.cards{grid-template-columns:repeat(2,1fr)}.dashboard{padding:20px}}
+    @media(max-width:500px){.cards{grid-template-columns:1fr}.topbar{align-items:flex-start;flex-direction:column}}
+  </style>
+</head>
+<body>
+  <main class="dashboard">
+    <header class="topbar">
+      <div><p class="eyebrow">D'MILA • SECURITY</p><h1>Central Executiva</h1><p class="user" id="userEmail">Carregando usuário...</p></div>
+      <button class="logout" id="logoutButton">Sair</button>
+    </header>
+    <section class="cards">
+      <article class="card"><span>Clientes ativos</span><strong>0</strong></article>
+      <article class="card"><span>Postos operacionais</span><strong>0</strong></article>
+      <article class="card"><span>Ocorrências</span><strong>0</strong></article>
+      <article class="card"><span>Alertas</span><strong>0</strong></article>
+    </section>
+    <section class="welcome"><h2>Bem-vindo à Central Executiva</h2><p>A estrutura inicial do sistema está pronta. O próximo passo é conectar os módulos de clientes, usuários, ocorrências e indicadores ao banco de dados.</p></section>
+  </main>
+  <script type="module">
+    import { supabase } from './js/supabase.js';
+    const { data } = await supabase.auth.getUser();
+    if (!data.user) window.location.href = './index.html';
+    else document.querySelector('#userEmail').textContent = data.user.email;
+    document.querySelector('#logoutButton').addEventListener('click', async () => {
+      await supabase.auth.signOut();
+      window.location.href = './index.html';
+    });
+  </script>
+</body>
+</html>
