@@ -31,5 +31,5 @@ form.addEventListener('submit', async (event) => {
     return;
   }
 
-  window.location.href = './painel.html';
+  window.location.href = './dashboard.html';
 });
