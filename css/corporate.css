@@ -1,0 +1,16 @@
+:root{--navy:#063b63;--navy-2:#0b4f80;--blue:#1178b5;--line:#d9e4ec;--muted:#647887}
+body{background:#eef3f7;color:#10283b}
+.sidebar{background:linear-gradient(180deg,#062f50 0%,#073f69 52%,#052f50 100%);box-shadow:8px 0 28px rgba(3,32,52,.12)}
+.brand{padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,.18)}
+.brand-sub{letter-spacing:.14em;font-weight:700;opacity:.92}
+.nav{gap:6px}.nav a{border:1px solid transparent}.nav a:hover{background:rgba(255,255,255,.09);transform:translateX(2px)}.nav a.active{background:rgba(31,126,184,.32);border-color:rgba(255,255,255,.08);box-shadow:inset 3px 0 #fff}
+.top-header{height:64px;padding:0 28px;box-shadow:0 1px 0 rgba(15,45,65,.02)}
+.page-title{font-size:14px;letter-spacing:-.01em}.page-subtitle{font-size:10px;color:#718492}
+.profile{padding:6px 8px 6px 13px;border:1px solid #dfe8ee;border-radius:10px;background:#fff;box-shadow:0 3px 10px rgba(20,54,76,.04)}.avatar{background:#073f69}
+.content{padding:30px 28px 40px;max-width:1450px}
+.section-head{margin-bottom:17px}.section-head h1{font-size:19px;font-weight:800}.section-head p{font-size:10px;color:#6d7f8d}.primary{background:#073f69;border-radius:8px;padding:10px 16px;box-shadow:0 4px 10px rgba(7,63,105,.12)}.primary:hover{background:#0b4f80}
+.cards{gap:15px}.metric{border:1px solid #dce6ed;border-radius:12px;padding:18px;min-height:104px;box-shadow:0 7px 20px rgba(21,54,75,.055)}.metric:before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:#1178b5}.metric:after{right:-13px;top:-18px;width:70px;height:70px;background:#edf6fb}.metric-label{font-size:9px;font-weight:700;letter-spacing:.04em;color:#607483}.metric-value{font-size:27px;color:#0a3554;margin-top:8px}.metric-help{font-size:9px;color:#7a8a96}
+.grid-2{gap:15px;margin-top:15px}.panel{border:1px solid #dce6ed;border-radius:12px;padding:17px;box-shadow:0 7px 20px rgba(21,54,75,.05)}.panel-title{font-size:13px;color:#173a53}.panel-subtitle{font-size:9px;color:#758693}.chart-wrap{height:215px;margin-top:12px}
+.attention{margin-top:15px}.data-table{font-size:9px}.data-table th{background:#f2f6f9;color:#607686;padding:10px}.data-table td{padding:11px 10px}.data-table tbody tr:hover td{background:#f8fbfd}
+.badge{padding:5px 9px;font-size:8px}.empty{padding:32px}
+@media(max-width:700px){.top-header{height:60px;padding:0 14px}.content{padding:18px 13px 28px}.profile-text{display:none}.section-head{align-items:flex-start}.primary{padding:9px 12px}}
