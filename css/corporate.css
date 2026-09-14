@@ -19,3 +19,29 @@ body{background:#eef3f7;color:#10283b}
 .badge{padding:5px 9px;font-size:8px}.empty{padding:32px}
 @media(max-width:1050px){.brand-logo>img.security-logo{width:150px!important;max-width:150px!important}}
 @media(max-width:700px){.top-header{height:60px;padding:0 14px}.content{padding:18px 13px 28px}.profile-text{display:none}.section-head{align-items:flex-start}.primary{padding:9px 12px}.brand-logo{height:55px!important;min-height:55px!important}.brand-logo>img.security-logo{width:120px!important;max-width:120px!important}.brand-sub{display:none!important}}
+
+/* Padronização visual de todas as abas: mesma casca da tela Solicitações */
+body .sidebar{width:198px!important;padding:18px 13px!important}
+body .main{margin-left:198px!important;width:calc(100% - 198px)!important}
+body .top-header{height:56px!important;padding:0 24px!important}
+body .brand{padding:0 7px 18px!important}
+body .brand-logo{height:50px!important;min-height:50px!important;justify-content:flex-start!important;overflow:hidden!important;background:none!important;background-image:none!important}
+body .brand-logo>img.security-logo{width:168px!important;max-width:168px!important;height:50px!important;max-height:50px!important;object-fit:contain!important;object-position:left center!important;filter:none!important}
+body .nav{padding-top:17px!important;gap:7px!important}
+body .nav a{min-height:0!important;padding:11px 10px!important;border:1px solid transparent!important;border-radius:8px!important;gap:10px!important;font-size:13px!important}
+body .nav a.active{background:rgba(255,255,255,.16)!important;border-color:transparent!important;box-shadow:none!important}
+body .nav .icon{width:18px!important;height:18px!important;flex:0 0 18px!important;font-size:0!important}
+body .sidebar-footer{font-size:10px!important;padding:10px 5px!important}
+body .content{padding:25px 23px 35px!important;max-width:1400px!important}
+body .section-head{margin-bottom:15px!important}
+body .section-head h1{font-size:17px!important}
+body .section-head p{font-size:9px!important}
+body .primary{border-radius:7px!important;padding:10px 15px!important;font-size:12px!important}
+body .filters{gap:7px!important;margin-bottom:12px!important}
+body .filters button{border:1px solid #d9e3ea!important;background:#fff!important;border-radius:7px!important;padding:10px 12px!important;font-size:10px!important;font-weight:800!important;color:#0a426d!important}
+body .filters .primary{background:#063f6b!important;color:#fff!important;border-color:#063f6b!important}
+body .data-table{font-size:9px!important}
+body .data-table th{background:#f6f8fa!important;color:#5e7485!important;padding:9px!important}
+body .data-table td{padding:10px 9px!important}
+@media(max-width:1050px){body .sidebar{width:198px!important}body .main{margin-left:198px!important;width:calc(100% - 198px)!important}body .brand-logo>img.security-logo{width:150px!important;max-width:150px!important}}
+@media(max-width:700px){body .sidebar{width:66px!important;padding:12px 8px!important}body .main{margin-left:66px!important;width:calc(100% - 66px)!important}body .brand-logo{height:50px!important;min-height:50px!important;justify-content:center!important}body .brand-logo>img.security-logo{width:55px!important;max-width:55px!important;height:auto!important;max-height:55px!important}}
