@@ -1,7 +1,7 @@
 import { supabase } from './supabase.js';
 
 export const $=id=>document.getElementById(id);
-export const escapeHtml=(v='')=>String(v).replace(/[&<>\'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+export const escapeHtml=(v='')=>String(v).replace(/[&<>\'\"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','\"':'&quot;'}[c]));
 export const formatDate=v=>v?new Date(v).toLocaleDateString('pt-BR'):'—';
 export const formatDateTime=v=>v?new Date(v).toLocaleString('pt-BR'):'—';
 
@@ -14,8 +14,8 @@ function modern(){if(document.getElementById('modernUIStyle'))return;const s=doc
 body{background:linear-gradient(135deg,#f4f7fa,#eef3f7)}
 .sidebar{width:230px;padding:18px 14px;background:linear-gradient(180deg,#073f69,#06385e 55%,#052f50);box-shadow:8px 0 28px rgba(3,34,56,.12)}
 .brand{padding:0 8px 16px;border-bottom:1px solid rgba(255,255,255,.18)}
-.brand-logo{height:78px!important;display:flex!important;align-items:center!important;justify-content:flex-start!important;overflow:visible!important;padding:0!important;margin:0!important}
-.brand-logo>img.security-logo{display:block!important;width:175px!important;height:auto!important;max-width:175px!important;max-height:none!important;object-fit:contain!important;object-position:left center!important;filter:none!important;margin:0!important;flex:none!important}
+.brand-logo{height:86px!important;display:flex!important;align-items:center!important;justify-content:flex-start!important;overflow:visible!important;padding:0!important;margin:0!important}
+.brand-logo>img.security-logo{display:block!important;width:170px!important;height:60px!important;max-width:none!important;max-height:none!important;object-fit:contain!important;object-position:left center!important;filter:none!important;margin:0!important;flex:none!important}
 .brand-logo>span,.brand-logo:before,.brand-logo:after{display:none!important;content:none!important}
 .brand-sub{font-size:8px;letter-spacing:.14em;margin-top:0;color:#fff;font-weight:700}
 .nav{padding-top:18px;gap:8px}.nav a{min-height:44px;padding:11px 13px;border-radius:10px;gap:12px;color:rgba(255,255,255,.92);font-size:13px}.nav a:hover{background:rgba(255,255,255,.09);transform:translateX(2px)}.nav a.active{background:rgba(85,154,199,.38);box-shadow:inset 3px 0 #fff;color:#fff}.nav .icon{width:20px;height:20px;flex-basis:20px;display:grid;place-items:center;color:#fff;font-size:16px;line-height:1}.nav .icon:before,.nav .icon:after{display:none!important;content:none!important}.nav a .icon{font-family:Arial,sans-serif;font-weight:700}
@@ -24,7 +24,7 @@ body{background:linear-gradient(135deg,#f4f7fa,#eef3f7)}
 @media(max-width:700px){.sidebar{width:70px;padding:14px 8px}.brand-logo{height:45px!important;justify-content:center!important}.brand-logo>img.security-logo{display:none!important}.brand-sub{display:none}.main{margin-left:70px;width:calc(100% - 70px)}.nav a{justify-content:center;padding:11px 8px}.nav a span:not(.icon){display:none}}
 `;document.head.appendChild(s)}
 
-export function setupShell(active){modern();const b=document.querySelector('.brand-logo');if(b){b.innerHTML='';const img=document.createElement('img');img.className='security-logo';img.src='./assets/logo-security-original.svg?v=7';img.alt='Security — Segurança e Serviços';b.appendChild(img)}document.querySelectorAll('.nav a').forEach(a=>{a.classList.toggle('active',a.dataset.page===active);const i=a.querySelector('.icon');if(i)i.textContent=icons[a.dataset.page]||''});const btn=$('logoutButton');if(btn)btn.addEventListener('click',async()=>{await supabase.auth.signOut();location.href='./index.html'})}
+export function setupShell(active){modern();const b=document.querySelector('.brand-logo');if(b){b.innerHTML='';const img=document.createElement('img');img.className='security-logo';img.src='./assets/logo-security-original.svg?v=14';img.alt='Security — Segurança e Serviços';b.appendChild(img)}document.querySelectorAll('.nav a').forEach(a=>{a.classList.toggle('active',a.dataset.page===active);const i=a.querySelector('.icon');if(i)i.textContent=icons[a.dataset.page]||''});const btn=$('logoutButton');if(btn)btn.addEventListener('click',async()=>{await supabase.auth.signOut();location.href='./index.html'})}
 export function badgeStatus(status){const m={aberto:['badge-open','Aberto'],'em andamento':['badge-progress','Em andamento'],concluido:['badge-done','Concluído'],concluída:['badge-done','Concluída'],concluído:['badge-done','Concluído']};const x=m[String(status||'').toLowerCase()]||['badge-open',status||'Aberto'];return `<span class="badge ${x[0]}">${escapeHtml(x[1])}</span>`}
 export function badgePriority(priority){const p=String(priority||'Média').toLowerCase();const c=p.includes('crít')||p.includes('crit')?'badge-critical':p.includes('alta')?'badge-high':'badge-medium';return `<span class="badge ${c}">${escapeHtml(priority||'Média')}</span>`}
 export async function getSolicitacoes(){const{data,error}=await supabase.from('solicitacoes').select('*').order('criado_em',{ascending:false});if(error)throw error;return data||[]}
