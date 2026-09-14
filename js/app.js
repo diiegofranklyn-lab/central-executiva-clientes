@@ -81,6 +81,14 @@ function applyModernUI() {
     .metric-label{font-size:9px;font-weight:700}.metric-value{font-size:27px}
     .grid-2{gap:16px;margin-top:16px}.panel{border-radius:13px;box-shadow:0 8px 24px rgba(23,56,79,.06);padding:17px}
     .attention{margin-top:16px}.data-table th{padding:11px 10px}.data-table td{padding:11px 10px}
+    /* Icones simples, como no visual original */
+    .nav .icon{width:15px;height:18px;flex-basis:15px;font-size:13px;text-align:center;color:#fff}
+    .nav .icon svg{display:none!important}
+    .nav .icon:before{content:'•';display:block!important;width:auto!important;height:auto!important;background:none!important;mask:none!important;-webkit-mask:none!important;font-size:14px;line-height:18px;color:#fff}
+    .nav a:nth-child(1) .icon:before{content:'▦'}
+    .nav a:nth-child(2) .icon:before{content:'▤'}
+    .nav a:nth-child(3) .icon:before{content:'•'}
+    .nav a:nth-child(4) .icon:before{content:'▥'}
     @media(max-width:1050px){.sidebar{width:210px}.main{margin-left:210px;width:calc(100% - 210px)}}
     @media(max-width:700px){.sidebar{width:70px;padding:14px 8px}.security-logo{display:none}.brand-logo{height:45px;justify-content:center}.brand-logo:before{content:'S';font-size:26px;font-weight:800;color:#fff}.brand-sub{display:none}.nav{padding-top:15px}.nav a{justify-content:center;padding:11px 8px}.nav a.active{box-shadow:none}.main{margin-left:70px;width:calc(100% - 70px)}.top-header{height:58px;padding:0 14px}.content{padding:18px 13px 30px}.profile{padding:5px}.profile .profile-text{display:none}}
   `;
