@@ -2,7 +2,7 @@
 body{background:#eef3f7;color:#10283b}
 .sidebar{background:linear-gradient(180deg,#062f50 0%,#073f69 52%,#052f50 100%);box-shadow:8px 0 28px rgba(3,32,52,.12)}
 .brand{padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,.18)}
-.brand-logo{height:88px!important;min-height:88px!important;display:block!important;background-image:url('../assets/logo-security-original.svg?v=17')!important;background-repeat:no-repeat!important;background-position:left center!important;background-size:190px auto!important;overflow:visible!important}
+.brand-logo{height:82px!important;min-height:82px!important;display:block!important;background-image:url('../assets/logo-security-original.svg?v=22')!important;background-repeat:no-repeat!important;background-position:left center!important;background-size:155px auto!important;overflow:visible!important}
 .brand-logo>span,.brand-logo>img{display:none!important}
 .brand-sub{letter-spacing:.14em;font-weight:700;opacity:.92}
 .nav{gap:6px}.nav a{border:1px solid transparent}.nav a:hover{background:rgba(255,255,255,.09);transform:translateX(2px)}.nav a.active{background:rgba(31,126,184,.32);border-color:rgba(255,255,255,.08);box-shadow:inset 3px 0 #fff}
