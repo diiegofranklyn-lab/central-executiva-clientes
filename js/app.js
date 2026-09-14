@@ -47,6 +47,13 @@ export function setupShell(active) {
   const brandLogo = document.querySelector('.brand-logo');
   if (brandLogo) {
     brandLogo.innerHTML = '<img class="security-logo" src="./assets/logo-security-original.svg" alt="Security — Segurança e Serviços">';
+    brandLogo.classList.add('security-logo-fixed');
+    if (!document.getElementById('securityLogoFix')) {
+      const style = document.createElement('style');
+      style.id = 'securityLogoFix';
+      style.textContent = `.brand-logo.security-logo-fixed{font-size:0!important;color:transparent!important;background:none!important}.brand-logo.security-logo-fixed:before{content:none!important}.brand-logo.security-logo-fixed .security-logo{display:block!important;width:168px!important;height:50px!important;object-fit:contain!important;object-position:left center!important}.brand-logo.security-logo-fixed span{display:none!important}@media(max-width:700px){.brand-logo.security-logo-fixed{width:48px!important;height:50px!important}.brand-logo.security-logo-fixed .security-logo{width:48px!important;height:50px!important}}`;
+      document.head.appendChild(style);
+    }
   }
   document.querySelectorAll('.nav a').forEach(a => a.classList.toggle('active', a.dataset.page === active));
   const btn = $('logoutButton');
