@@ -44,6 +44,10 @@ export async function requireAuth() {
 }
 
 export function setupShell(active) {
+  const brandLogo = document.querySelector('.brand-logo');
+  if (brandLogo) {
+    brandLogo.innerHTML = '<img class="security-logo" src="./assets/logo-security-original.svg" alt="Security — Segurança e Serviços">';
+  }
   document.querySelectorAll('.nav a').forEach(a => a.classList.toggle('active', a.dataset.page === active));
   const btn = $('logoutButton');
   if (btn) btn.addEventListener('click', async () => { await supabase.auth.signOut(); window.location.href='./index.html'; });
