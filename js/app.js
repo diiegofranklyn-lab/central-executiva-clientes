@@ -43,19 +43,23 @@ export async function requireAuth() {
   return data.user;
 }
 
+const icons = {
+  dashboard: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>',
+  solicitacoes: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h9l4 4V20.5H6z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M15 3.5v5h4M9 12h6M9 16h6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
+  clientes: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M5.5 20c.5-3.4 2.8-5.2 6.5-5.2s6 1.8 6.5 5.2M4 12.5a2.6 2.6 0 0 0-2 2.5v2.5h4M20 12.5a2.6 2.6 0 0 1 2 2.5v2.5h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
+  relatorios: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V11h4v9M10 20V5h4v15M16 20V8h4v12" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>'
+};
+
 export function setupShell(active) {
   const brandLogo = document.querySelector('.brand-logo');
   if (brandLogo) {
     brandLogo.innerHTML = '<img class="security-logo" src="./assets/logo-security-original.svg" alt="Security — Segurança e Serviços">';
-    brandLogo.classList.add('security-logo-fixed');
-    if (!document.getElementById('securityLogoFix')) {
-      const style = document.createElement('style');
-      style.id = 'securityLogoFix';
-      style.textContent = `.brand-logo.security-logo-fixed{font-size:0!important;color:transparent!important;background:none!important}.brand-logo.security-logo-fixed:before{content:none!important}.brand-logo.security-logo-fixed .security-logo{display:block!important;width:168px!important;height:50px!important;object-fit:contain!important;object-position:left center!important}.brand-logo.security-logo-fixed span{display:none!important}@media(max-width:700px){.brand-logo.security-logo-fixed{width:48px!important;height:50px!important}.brand-logo.security-logo-fixed .security-logo{width:48px!important;height:50px!important}}`;
-      document.head.appendChild(style);
-    }
   }
-  document.querySelectorAll('.nav a').forEach(a => a.classList.toggle('active', a.dataset.page === active));
+  document.querySelectorAll('.nav a').forEach(a => {
+    a.classList.toggle('active', a.dataset.page === active);
+    const icon = a.querySelector('.icon');
+    if (icon && icons[a.dataset.page]) icon.innerHTML = icons[a.dataset.page];
+  });
   const btn = $('logoutButton');
   if (btn) btn.addEventListener('click', async () => { await supabase.auth.signOut(); window.location.href='./index.html'; });
 }
